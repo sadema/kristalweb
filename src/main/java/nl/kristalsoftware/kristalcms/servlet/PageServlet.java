@@ -1,6 +1,7 @@
 package nl.kristalsoftware.kristalcms.servlet;
 
 import nl.kristalsoftware.kristalcms.page.PageContentHandler;
+import nl.kristalsoftware.kristalcms.page.PageContentHandlerImpl;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ public class PageServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        pageContentHandler = new PageContentHandler();
+        pageContentHandler = new PageContentHandlerImpl();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,21 +33,23 @@ public class PageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        //StringBuilder uri = new StringBuilder(request.getRequestURI());
         String contextPath = request.getContextPath();
         String uri = request.getRequestURI();
-        String name = uri.replace(contextPath + "/site/", "");
+        String nodePath = uri.replace(contextPath + "/site", "");
+        String name = nodePath.substring(1);
         if (name.contains("/")) {
             int pos = name.indexOf('/');
             name = name.substring(0, pos);
         }
+        out.append(pageContentHandler.getPage(contextPath, name, nodePath));
         //String name = uri.substring(uri.lastIndexOf("site/"));
-        out.append("<html>");
-        out.append("<head><title>KristalCMS</title></head>");
-        out.append("<body>");
-        out.append("<h1>Hello ").append(name).append("</h1>");
-        out.append("<p>").append(request.getRequestURI()).append("</p>");
-        out.append("</body>");
-        out.append("</html>");
+        //out.append("<html>");
+        //out.append("<head><title>KristalCMS</title></head>");
+        //out.append("<body>");
+        //out.append("<h1>Hello ").append(name).append("</h1>");
+        //out.append("<p>").append(request.getRequestURI()).append("</p>");
+        //out.append("<p>").append(nodePath).append("</p>");
+        //out.append("</body>");
+        //out.append("</html>");
     }
 }
