@@ -1,9 +1,14 @@
 package nl.kristalsoftware.kristalcms.page;
 
+import javax.inject.Inject;
+
 /**
  * Created by sjoerdadema on 22-05-15.
  */
 public class PageContentHandlerImpl implements PageContentHandler {
+
+    @Inject
+    private PageNodeHandler pageNodeHandler;
 
     public PageContentHandlerImpl() {}
 
