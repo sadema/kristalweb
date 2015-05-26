@@ -3,6 +3,9 @@ package nl.kristalsoftware.kristalcms.main;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.jcr.*;
 import java.io.*;
@@ -26,7 +29,24 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
     public void init() {
         logger.info("init postconstruct in KristalcmsRepositoryImpl");
         try {
-            Session session = repository.login();
+            Session session = this.createSession();
+            Node rootNode = session.getRootNode();
+            if (!rootNode.hasNode("site")) {
+                logger.info("No site node available, import.....");
+                this.importXML(session, "kristalcmspages.xml");
+            }
+            else {
+                logger.info("The site node found");
+                this.exportXML(session);
+            }
+            this.logoutSession(session);
+        } catch (RepositoryException e) {
+            e.printStackTrace();
+        }
+        /*
+        Session session;
+        try {
+            //Session session = repository.login();
             Node rootNode = session.getRootNode();
             if (!rootNode.hasNode("site")) {
                 logger.info("No site node available, import.....");
@@ -39,6 +59,25 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
         } catch (RepositoryException e) {
             e.printStackTrace();
         }
+        */
+    }
+
+    @RequestScoped
+    @Produces
+    public Session createSession() {
+        Session session = null;
+        try {
+            logger.info("createSession");
+            session = repository.login();
+        } catch (RepositoryException e) {
+            e.printStackTrace();
+        }
+        return session;
+    }
+
+    public void logoutSession(@Disposes final Session session) {
+        logger.info("logoutSession");
+        session.logout();
     }
 
     @Override

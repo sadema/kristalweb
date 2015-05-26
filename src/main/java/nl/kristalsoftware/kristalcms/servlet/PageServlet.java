@@ -25,7 +25,7 @@ public class PageServlet extends HttpServlet {
     private Logger logger;
 
     @Inject
-    private PageContentHandler pageContentHandler; // = null;
+    private PageContentHandler pageContentHandler;
 
     @Inject
     private BaseRepository cmsRepository;
