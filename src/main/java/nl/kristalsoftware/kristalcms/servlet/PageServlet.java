@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * Created by sjoerdadema on 21-05-15.
  */
-@WebServlet(name = "PageServlet", urlPatterns = {"/cms/*"} )
+@WebServlet(name = "PageServlet", urlPatterns = {"/site/*"} )
 public class PageServlet extends HttpServlet {
 
     @Inject
@@ -47,7 +47,7 @@ public class PageServlet extends HttpServlet {
         String uri = request.getRequestURI();
         String nodePath = uri.replace(contextPath, "");
         logger.info("nodePath: " + nodePath);
-        String name = nodePath.replace("/cms/", "");
+        String name = nodePath.replace("/site/", "");
         logger.info("customerName: " + name);
         if (name.contains("/")) {
             int pos = name.indexOf('/');

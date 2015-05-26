@@ -13,8 +13,8 @@ public class KristalcmsManagedBean {
     @Inject
     private Logger logger;
 
-    @Inject
-    private BaseRepository cmsRepository;
+    //@Inject
+    //private BaseRepository cmsRepository;
 
     public KristalcmsManagedBean() {
         logger.info("KristalcmsManagedBean constructor");
