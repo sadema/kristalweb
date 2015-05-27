@@ -7,4 +7,8 @@ public interface PageContentHandler {
 
     public StringBuilder getPage(String contextPath, String customerName, String nodePath);
 
+    public boolean pageExists(String nodePath);
+
+    public boolean createPage(String nodePath, String content);
+
 }

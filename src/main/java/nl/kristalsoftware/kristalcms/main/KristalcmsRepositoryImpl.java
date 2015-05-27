@@ -1,5 +1,7 @@
 package nl.kristalsoftware.kristalcms.main;
 
+import nl.kristalsoftware.kristalcms.page.PageContentHandler;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -43,23 +45,6 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
         } catch (RepositoryException e) {
             e.printStackTrace();
         }
-        /*
-        Session session;
-        try {
-            //Session session = repository.login();
-            Node rootNode = session.getRootNode();
-            if (!rootNode.hasNode("site")) {
-                logger.info("No site node available, import.....");
-                this.importXML(session, "kristalcmspages.xml");
-            }
-            else {
-                logger.info("The site node found");
-                this.exportXML(session);
-            }
-        } catch (RepositoryException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     @RequestScoped
@@ -81,8 +66,14 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
     }
 
     @Override
-    public void checkForContent() {
+    public void checkForContent(String nodePath, PageContentHandler pageContentHandler) {
         logger.info("calling checkForContent() method");
+        if (!pageContentHandler.pageExists(nodePath)) {
+            logger.info("Page " + nodePath + " does not exist");
+        }
+        else {
+            logger.info("Page " + nodePath + " does exist");
+        }
     }
 
     private void importXML(Session session, String xmlFileName) {

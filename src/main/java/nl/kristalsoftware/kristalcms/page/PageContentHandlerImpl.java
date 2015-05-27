@@ -21,4 +21,14 @@ public class PageContentHandlerImpl implements PageContentHandler {
         return page;
     }
 
+    @Override
+    public boolean pageExists(String nodePath) {
+        return pageNodeHandler.nodeExists(nodePath);
+    }
+
+    @Override
+    public boolean createPage(String nodePath, String content) {
+        return false;
+    }
+
 }

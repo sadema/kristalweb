@@ -1,5 +1,7 @@
 package nl.kristalsoftware.kristalcms.main;
 
+import nl.kristalsoftware.kristalcms.page.PageContentHandler;
+
 import javax.jcr.Session;
 
 /**
@@ -7,6 +9,6 @@ import javax.jcr.Session;
  */
 public interface BaseRepository {
 
-    public void checkForContent();
+    public void checkForContent(String s, PageContentHandler pageContentHandler);
 
 }
