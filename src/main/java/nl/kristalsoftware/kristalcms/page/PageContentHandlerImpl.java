@@ -1,6 +1,9 @@
 package nl.kristalsoftware.kristalcms.page;
 
 import javax.inject.Inject;
+import javax.jcr.RepositoryException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by sjoerdadema on 22-05-15.
@@ -8,17 +11,34 @@ import javax.inject.Inject;
 public class PageContentHandlerImpl implements PageContentHandler {
 
     @Inject
+    private Logger log;
+
+    @Inject
     private PageNodeHandler pageNodeHandler;
 
     public PageContentHandlerImpl() {}
 
     @Override
-    public StringBuilder getPage(String contextPath, String customerName, String nodePath) {
+    public String getPage(String contextPath, String customerName, String nodePath) {
+        String page = "";
+        if (pageNodeHandler.nodeExists(nodePath)) {
+            try {
+                page = pageNodeHandler.getPage(nodePath);
+            } catch (RepositoryException e) {
+                log.info("Node path not found: " + nodePath);
+            }
+        }
+        else {
+            log.info("Node path not found: " + nodePath);
+        }
+        return page;
+/*
         StringBuilder page = new StringBuilder("<html><head><title>KristalCMS</title></head><body>");
         page.append("<h1>Hello ").append(customerName).append("</h1>");
         page.append("<p>").append(nodePath).append("</p>");
         page.append("</body></html>");
         return page;
+*/
     }
 
     @Override
@@ -28,7 +48,7 @@ public class PageContentHandlerImpl implements PageContentHandler {
 
     @Override
     public boolean createPage(String nodePath, String content) {
-        return false;
+        return pageNodeHandler.createFileNode(nodePath, content);
     }
 
 }

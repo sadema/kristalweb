@@ -5,7 +5,7 @@ package nl.kristalsoftware.kristalcms.page;
  */
 public interface PageContentHandler {
 
-    public StringBuilder getPage(String contextPath, String customerName, String nodePath);
+    public String getPage(String contextPath, String customerName, String nodePath);
 
     public boolean pageExists(String nodePath);
 

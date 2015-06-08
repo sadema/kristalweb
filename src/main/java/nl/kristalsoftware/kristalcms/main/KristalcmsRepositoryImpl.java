@@ -68,8 +68,18 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
     @Override
     public void checkForContent(String nodePath, PageContentHandler pageContentHandler) {
         logger.info("calling checkForContent() method");
+        String customerName = "prima";
+        StringBuilder page = new StringBuilder("<html><head><title>KristalCMS</title></head><body>");
+        page.append("<h1>Hello ").append(customerName).append("</h1>");
+        page.append("<p>").append(nodePath).append("</p>");
+        page.append("</body></html>");
+
         if (!pageContentHandler.pageExists(nodePath)) {
             logger.info("Page " + nodePath + " does not exist");
+            pageContentHandler.createPage(nodePath, page.toString());
+            Session session = this.createSession();
+            exportXML(session);
+            logoutSession(session);
         }
         else {
             logger.info("Page " + nodePath + " does exist");

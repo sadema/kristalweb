@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sv:node>xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     xmlns:jcr="http://www.jcp.org/jcr/1.0" sv:name="site">
     <sv:property sv:type="Name" sv:name="jcr:primaryType">
         <sv:value>nt:unstructured</sv:value>
     </sv:property>
-    <sv:node>sv:name="prima">
+    <sv:node sv:name="prima">
         <sv:property sv:type="Name" sv:name="jcr:primaryType">
             <sv:value>nt:unstructured</sv:value>
         </sv:property>
