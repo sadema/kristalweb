@@ -1,6 +1,6 @@
-package nl.kristalsoftware.kristalcms.main;
+package nl.kristalsoftware.kristalweb.main;
 
-import nl.kristalsoftware.kristalcms.page.PageContentHandler;
+import nl.kristalsoftware.kristalweb.page.PageContentHandler;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -17,25 +17,25 @@ import java.util.logging.Logger;
  * Created by sjoerdadema on 24-05-15.
  */
 @ApplicationScoped
-public class KristalcmsRepositoryImpl implements BaseRepository {
+public class KristalwebRepositoryImpl implements BaseRepository {
 
     @Inject
     private Logger logger;
 
-    @Resource(mappedName="java:/jcr/kristalcms")
+    @Resource(mappedName="java:/jcr/kristalweb")
     private javax.jcr.Repository repository;
 
-    public KristalcmsRepositoryImpl() {}
+    public KristalwebRepositoryImpl() {}
 
     @PostConstruct
     public void init() {
-        logger.info("init postconstruct in KristalcmsRepositoryImpl");
+        logger.info("init postconstruct in KristalwebRepositoryImpl");
         try {
             Session session = this.createSession();
             Node rootNode = session.getRootNode();
             if (!rootNode.hasNode("site")) {
                 logger.info("No site node available, import.....");
-                this.importXML(session, "kristalcmspages.xml");
+                this.importXML(session, "kristalwebpages.xml");
             }
             else {
                 logger.info("The site node found");
@@ -104,7 +104,7 @@ public class KristalcmsRepositoryImpl implements BaseRepository {
 
     private void exportXML(Session session) {
         try {
-            session.exportSystemView("/site", new FileOutputStream(new File("/Volumes/LaCie/tmp_output/kristalcms/site.xml")), false, false);
+            session.exportSystemView("/site", new FileOutputStream(new File("/Volumes/LaCie/tmp_output/kristalweb/site.xml")), false, false);
             //session.exportSystemView("/config", new FileOutputStream(new File("/Users/sjoerd/Documents/tmp/config.xml")), false, false);
             //session.exportSystemView("/orders", new FileOutputStream(new File("/Users/sjoerd/Documents/tmp/orders.xml")), false, false);
             //session.exportSystemView("/countries", new FileOutputStream(new File("/Users/sjoerd/Documents/tmp/dealers.xml")), false, false);

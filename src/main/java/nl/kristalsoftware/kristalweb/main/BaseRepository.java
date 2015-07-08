@@ -1,8 +1,6 @@
-package nl.kristalsoftware.kristalcms.main;
+package nl.kristalsoftware.kristalweb.main;
 
-import nl.kristalsoftware.kristalcms.page.PageContentHandler;
-
-import javax.jcr.Session;
+import nl.kristalsoftware.kristalweb.page.PageContentHandler;
 
 /**
  * Created by sjoerdadema on 24-05-15.

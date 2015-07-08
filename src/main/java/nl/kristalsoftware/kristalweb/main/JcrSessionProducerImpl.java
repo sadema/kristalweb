@@ -1,8 +1,6 @@
-package nl.kristalsoftware.kristalcms.main;
+package nl.kristalsoftware.kristalweb.main;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.jcr.Session;
 
 /**
  * Created by sjoerdadema on 26-05-15.

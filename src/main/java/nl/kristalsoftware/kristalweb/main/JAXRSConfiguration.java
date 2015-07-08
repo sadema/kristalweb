@@ -1,4 +1,4 @@
-package nl.kristalsoftware.kristalcms.main;
+package nl.kristalsoftware.kristalweb.main;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

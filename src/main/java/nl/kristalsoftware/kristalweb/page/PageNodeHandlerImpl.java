@@ -1,11 +1,10 @@
-package nl.kristalsoftware.kristalcms.page;
+package nl.kristalsoftware.kristalweb.page;
 
-import nl.kristalsoftware.kristalcms.main.KristalcmsManagedBean;
+import nl.kristalsoftware.kristalweb.main.KristalcmsManagedBean;
 
 import javax.inject.Inject;
 import javax.jcr.*;
 import java.io.ByteArrayInputStream;
-import java.util.Base64;
 import java.util.logging.Logger;
 
 /**

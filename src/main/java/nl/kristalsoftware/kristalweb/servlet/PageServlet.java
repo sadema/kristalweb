@@ -1,8 +1,7 @@
-package nl.kristalsoftware.kristalcms.servlet;
+package nl.kristalsoftware.kristalweb.servlet;
 
-import nl.kristalsoftware.kristalcms.main.BaseRepository;
-import nl.kristalsoftware.kristalcms.page.PageContentHandler;
-import nl.kristalsoftware.kristalcms.page.PageContentHandlerImpl;
+import nl.kristalsoftware.kristalweb.main.BaseRepository;
+import nl.kristalsoftware.kristalweb.page.PageContentHandler;
 
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;

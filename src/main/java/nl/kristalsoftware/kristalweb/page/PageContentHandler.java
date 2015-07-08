@@ -1,4 +1,4 @@
-package nl.kristalsoftware.kristalcms.page;
+package nl.kristalsoftware.kristalweb.page;
 
 /**
  * Created by sjoerdadema on 22-05-15.

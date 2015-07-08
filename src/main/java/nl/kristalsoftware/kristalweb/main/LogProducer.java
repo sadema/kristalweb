@@ -1,4 +1,4 @@
-package nl.kristalsoftware.kristalcms.main;
+package nl.kristalsoftware.kristalweb.main;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;

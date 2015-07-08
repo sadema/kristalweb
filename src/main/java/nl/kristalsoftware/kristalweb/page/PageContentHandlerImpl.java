@@ -1,8 +1,7 @@
-package nl.kristalsoftware.kristalcms.page;
+package nl.kristalsoftware.kristalweb.page;
 
 import javax.inject.Inject;
 import javax.jcr.RepositoryException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

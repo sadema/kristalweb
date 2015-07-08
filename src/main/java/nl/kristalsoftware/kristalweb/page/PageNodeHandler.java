@@ -1,6 +1,5 @@
-package nl.kristalsoftware.kristalcms.page;
+package nl.kristalsoftware.kristalweb.page;
 
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
