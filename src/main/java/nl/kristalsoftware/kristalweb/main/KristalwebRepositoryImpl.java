@@ -68,6 +68,7 @@ public class KristalwebRepositoryImpl implements BaseRepository {
     @Override
     public void checkForContent(String nodePath, PageContentHandler pageContentHandler) {
         logger.info("calling checkForContent() method");
+        /*
         String customerName = "prima";
         StringBuilder page = new StringBuilder("<html><head><title>KristalCMS</title></head><body>");
         page.append("<h1>Hello ").append(customerName).append("</h1>");
@@ -84,6 +85,7 @@ public class KristalwebRepositoryImpl implements BaseRepository {
         else {
             logger.info("Page " + nodePath + " does exist");
         }
+        */
     }
 
     private void importXML(Session session, String xmlFileName) {

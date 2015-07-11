@@ -1,6 +1,6 @@
 package nl.kristalsoftware.kristalweb.page;
 
-import nl.kristalsoftware.kristalweb.main.KristalcmsManagedBean;
+import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
 
 import javax.inject.Inject;
 import javax.jcr.*;
@@ -32,19 +32,15 @@ public class PageNodeHandlerImpl implements PageNodeHandler {
     }
 
     @Override
-    public boolean createFileNode(String nodePath, String content) {
-        boolean successFlag = false;
-        int lastElementIndex = nodePath.lastIndexOf('/');
-        String nodeName = nodePath.substring(lastElementIndex+1);   //remove slash
-        logger.info("nodeName: " + nodeName);
-        String parentNodePath = nodePath.substring(0, lastElementIndex);
-        logger.info("ParentNodePath: " + parentNodePath);
+    public String createFileNode(String parentNodePath, String id, String content) throws PathNotFoundException, ItemExistsException, AppRepositoryException {
+        String newPagePath = null;
         try {
             Node parentNode = session.getNode(parentNodePath);
             if (parentNode != null) {
                 ByteArrayInputStream is = new ByteArrayInputStream(content.getBytes());
                 Binary binaryData = session.getValueFactory().createBinary(is);
-                Node pageNode = parentNode.addNode(nodeName, "nt:file");
+                Node pageNode = parentNode.addNode(id, "nt:file");
+                newPagePath = pageNode.getPath();
                 Node contentNode = pageNode.addNode("jcr:content", "nt:resource");
                 contentNode.setProperty("jcr:mimeType", "text/html");
                 contentNode.setProperty("jcr:encoding", "UTF-8");
@@ -52,14 +48,13 @@ public class PageNodeHandlerImpl implements PageNodeHandler {
             }
             try {
                 session.save();
-                successFlag = true;
             } catch (RepositoryException e) {
-                e.printStackTrace();
+                throw new AppRepositoryException(e.getMessage(), e);
             }
         } catch (RepositoryException e) {
-            e.printStackTrace();
+            throw new AppRepositoryException(e.getMessage(), e);
         }
-        return successFlag;
+        return newPagePath;
     }
 
     @Override

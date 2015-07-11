@@ -1,6 +1,10 @@
 package nl.kristalsoftware.kristalweb.page;
 
+import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+
 import javax.inject.Inject;
+import javax.jcr.ItemExistsException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import java.util.logging.Logger;
 
@@ -46,8 +50,13 @@ public class PageContentHandlerImpl implements PageContentHandler {
     }
 
     @Override
-    public boolean createPage(String nodePath, String content) {
-        return pageNodeHandler.createFileNode(nodePath, content);
+    public String createPage(String pageNodePath, String id, String content) throws PathNotFoundException, AppRepositoryException, ItemExistsException {
+        String nodePath = new StringBuilder(pageNodePath).append('/').append(id).toString();
+        if (pageNodeHandler.nodeExists(nodePath)) {
+            log.info(new StringBuilder("Node: ").append(nodePath).append(" exists").toString());
+            throw new ItemExistsException();
+        }
+        return pageNodeHandler.createFileNode(pageNodePath, id, content);
     }
 
 }

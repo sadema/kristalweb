@@ -1,5 +1,9 @@
 package nl.kristalsoftware.kristalweb.page;
 
+import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+
+import javax.jcr.ItemExistsException;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 /**
@@ -9,7 +13,7 @@ public interface PageNodeHandler {
 
     boolean nodeExists(String path);
 
-    boolean createFileNode(String nodePath, String content);
+    String createFileNode(String parentNodePath, String nodename, String content) throws PathNotFoundException, ItemExistsException, AppRepositoryException;
 
     String getPage(String path) throws RepositoryException;
 
